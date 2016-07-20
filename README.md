@@ -8,4 +8,9 @@ Steps to Run:<br>
 5) type "make" into the commandline <br>
 6) to run ./F_W.exe <br>
 <br>
-Let me know if there are any issues
+Let me know if there are any issues<br>
+<br>
+Note: still working on improvements in calculating and displaying the Average Excess Cost.<br>
+Additionally, I'm having issues with using fclose on the files used for ChicagoSketch on some machines.<br>
+Any suggestions would be great.
+
