@@ -1,6 +1,6 @@
 # Frank-Wolfe-Method-tntp
 
-Steps to Run:
+Steps to Run:\n
 1) Download the zip file
 2) Exact
 3) In the commandline, cd to the fold
