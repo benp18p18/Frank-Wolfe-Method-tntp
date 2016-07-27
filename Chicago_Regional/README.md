@@ -1,47 +1,50 @@
-# Network
-A fairly realistic yet aggregated representation of the Chicago region.  The original data is known to provide low levels of congestion, not realistic for the Chicago region. For algorithm testing it is recommended to double the original trip table.
+# Chicago Regional Network and Demand
+A large-scale, detailed representation of the Chicago region. 
 
-## Source  
-Developed and provided by the Chicago Area Transportation Study. 
-Via: http://www.bgu.ac.il/~bargera/tntp/
-
+## Source
+Developed and provided by the Chicago Area Transportation Study (CATS)
 
 ## Scenario
-
+FIXME
 
 ## Contents
 
- - `ChicagoSketch_net.tntp` Network  
- - `ChicagoSketch_trips.tntp` Demand  
- - `ChicagoSketch_node.tntp` Node coordinates in Illinois state plane coordinate system, feet
- - `ChicagoSketch_flow.tntp`  Best known flow solution   
+ - `ChicagoRegional_net.tntp` Network
+ - `ChicagoRegional_node.tntp` Node coordinates
+ - `ChicagoRegional_trips.tntp` Demand
 
-## Dimensions  
-Zones: 387
-Nodes: 933
-Links: 2950
-Trips: 1,260,907.4400005303
+## Dimensions
+Zones: 1,790
+Nodes: 12,982
+Links: 39,018
+Trips: 1,360,427
 
 ## Units
-Time: minutes
+Time: Minutes
 Distance: miles
-Speed: 
-Cost: cents 
-Coordinates: Illinois State Plane, feet
+Cost: cents  [ FIXME in what year? ]
 
 ## Generalized Cost Weights
-Toll: 0.02 minutes/cent
-Distance: 0.04 minutes/mile
+Toll: 0.1 minutes/cent
+Distance: 0.25 minutes/mile
 
 ## Solutions
+Best-known link flows solution with Average Excess Cost of 8.3E-12. Optimal objective function value:  30792611.3864393. 
 
-`ChicagoSketch_flow.tntp` is the best known flow solution with Average Excess Cost of 2.1E-13. Optimal objective function value: 17313018.7387477. 
+[Aroon Aungsuyanon](mailto://aroon_jung@yahoo.com) studied the set of equilibrium PAS for this network under various demand levels. The results of his analysis:  
+ - [5,617 maps for CS=0.2](https://app.box.com/s/i7zvz5gyw8k5kweps90r)  
+ - [11,702 maps for CS=0.1](https://app.box.com/s/erhjbaoljv5094xhd9wr) 
+ - [22,500 maps for CS=0.05](https://app.box.com/s/vy53ly09y5wjwn08hqur)
 
 ## Known Issues
 FIXME translate to Github Issues
 
-## References
+Wolfgang Scherr from PTV America:
+1. There seem to be discrepancies between "speed" and "free flow travel time" in certain links of the Chicago Regional network. For example, the "Chicago Skyway" (nodes: 8158, 7714, 8184, 8190, 8196, 8246, 8208, ...,2049, 2387) has "speed" of 27MPH while the free flow travel times correspond to 45MPH. As indicated above, the results reported here rely on free flow travel times and not on speeds.
 
-The preparation of this dataset is described in the following references:  
- - Eash, R.W., K.S. Chon, Y.J. Lee and D.E. Boyce (1983) Equilibrium Traffic Assignment on an Aggregated Highway Network for Sketch Planning, Transportation Research Record, 994, 30-37.  
- - Boyce, D.E., K.S. Chon, M.E. Ferris, Y.J. Lee, K-T. Lin and R.W. Eash (1985) Implementation and Evaluation of Combined Models of Urban Travel and Location on a Sketch Planning Network, Chicago Area Transportation Study, xii + 169 pp.  
+2. There are some bi-directional links which in reality represent mono-directional ramps. The current bi-directional coding creates parallel alternatives to get on or off the freeway/expressway, which leads to a kind of local randomness of the link flow solution at these places. I would recommend coding all ramps as one-ways. Here are a couple of such places, defined by key node numbers:
+A) 6652, 2430, 2429
+B) 8559, 8563
+C) 2196, 2301
+D) 7138, 8994
+E) 10265, 10253, 11946
