@@ -1,2 +1,0 @@
-F_W: exact_trips.cpp q_sort.cpp int_links.cpp defines.h exact_network.cpp shortest_path.cpp links_used.cpp find_flows.cpp find_times.cpp alpha_find.cpp test.cpp F_W.cpp
-	g++ -Wall -o F_W q_sort.cpp int_links.cpp exact_trips.cpp exact_network.cpp shortest_path.cpp links_used.cpp find_flows.cpp find_times.cpp alpha_find.cpp test.cpp F_W.cpp -lm -g
