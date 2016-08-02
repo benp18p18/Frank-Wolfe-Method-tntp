@@ -10,14 +10,15 @@ Steps to Run:<br>
 <br>
 NOTE:<br>
 There are some data sets in the folder itself and others can be used either by:<br>
-  -Placing the datasets in the folder (The preffered method)<br>
+  -Placing the datasets in the folder (The preferred method)<br>
   -Using there paths as there location<br>
+  (if nothing happens then there might be issue opening openning up the datasets. Make sure everything is correctly inputted.)<br>
  <br>
  Where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
  <br>
  <br>
  Additionally it should be noted that some of the datasets in there default format<br>
- might not be formatted correctly. To do so, remove the ~comment lines but leave ~header line. <br>
+ might not be formatted correctly. To do so, remove the ~comment lines but leave the ~header line. <br>
 <br>
 8) input the Miles cost which is a impedence cost of minute/mile. Each Dataset has a different Miles cost<br>
 <br>
@@ -31,12 +32,12 @@ For the datasets in the folder already:<br>
 Results) The results will be written out to a data.txt file. 
 <br>
 <br>
-The impedence function used: t = a + a(0.15)(x/capacity)^4<br>
+The impedence function used: t__i = a + a(0.15)[(x/capacity)^4]<br>
 Where:<br> 
-      t = the time on link i<br>
-       a = free flow time for the link (given)<br>
+       t__i = the time on link i<br>
+       a__i = free flow time for link i(given)<br>
        x = flows<br>
-       capacity = flow capacity (given)<br>
+       capacity__i = flow capacity (given)<br>
        0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
 Let me know if there are any issues<br>
