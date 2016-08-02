@@ -16,7 +16,7 @@ There are some data sets in the folder itself and others can be used either by:<
  Where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
  <br>
  <br>
- Additionally it should be noted that some of the datasets in there default<br>
+ Additionally it should be noted that some of the datasets in there default format<br>
  might not be formatted correctly. To do so, remove the ~comment lines but leave ~header line. <br>
 <br>
 8) input the Miles cost which is a impedence cost of minute/mile. Each Dataset has a different Miles cost<br>
