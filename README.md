@@ -6,12 +6,15 @@ Steps to Run:<br>
 3) In the commandline, cd to the fold <br>
 5) type "make" into the commandline <br>
 6) to run ./F_W.exe <br>
-7) Chose either c for a custon set of a network and trips or chose d for the default set of the Chicago Regional<br>
+7) Chose either c for a custom set of a network and trips or chose d for the default set of the Chicago Regional<br>
 <br>
 NOTE:<br>
 There are some data sets in the folder itself and others can be used either by:<br>
   -Placing the datasets in the folders (The preffered method)<br>
   -Using there paths as there location<br>
+ <br>
+ <br>
+ The URL from where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
  <br>
  Additionally it should be noted that some of the datasets in there default<br>
  might not be formatted correctly. To do so, remove the ~comment lines but leave ~header line. <br>
