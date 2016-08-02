@@ -10,7 +10,7 @@ Steps to Run:<br>
 <br>
 NOTE:<br>
 There are some data sets in the folder itself and others can be used either by:<br>
-  -Placing the datasets in the folders (The preffered method)<br>
+  -Placing the datasets in the folder (The preffered method)<br>
   -Using there paths as there location<br>
  <br>
  Where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
@@ -27,6 +27,16 @@ For the datasets in the folder already:<br>
 (Sioux Falls) Mile Costs = 0<br>
 <br>
 9) Lastly chose the number of integrations of the Frank-Wolfe method to do.<br>
+<br>
+Results) The results will be written out to a data.txt file. 
+<br>
+<br>
+The impedence function used: t = a + a*(0.15)*(x/capacity)^4<br>
+Where: t = the time on link i<br>
+       a = free flow time for the link (given)<br>
+       x = flows<br>
+       capacity = flow capacity (given)<br>
+       0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
 Let me know if there are any issues<br>
 <br>
