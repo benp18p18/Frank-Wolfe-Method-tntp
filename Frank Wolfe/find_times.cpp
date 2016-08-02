@@ -4,7 +4,7 @@
 #include <math.h>
 #include "find_times.h"
 
-void find_times(double flows[], double times[], double **network)
+void find_times(double flows[], double *times, double **network)
 {
 
 int i;

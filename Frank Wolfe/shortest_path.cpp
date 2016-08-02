@@ -5,7 +5,7 @@
 #include "shortest_path.h"
 #include "q_sort.h"
 
-void shortest_path(struct values *data, double times[], int ** L, int ** L_spot)
+void shortest_path(struct values *data, double* times, int ** L, int ** L_spot)
 {
 
 double **L_value;

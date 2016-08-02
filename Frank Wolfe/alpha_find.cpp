@@ -4,7 +4,7 @@
 #include <math.h>
 #include "alpha_find.h"
 
-double get_alpha(double**network, double tall, double dif_flows[], double old_flows[])
+double get_alpha(double**network, double tall, double *dif_flows, double *old_flows)
 {
 double alpha;
 double r;
@@ -70,7 +70,7 @@ return(alpha);
 
 
 
-void alpha_mode(double flows[], double old_flows[], double dif_flows[])
+void alpha_mode(double *flows, double *old_flows, double *dif_flows)
 {
 int i;
 for ( i = 0; i < NUM_LINKS; i++)
@@ -89,7 +89,7 @@ for ( i = 0; i < NUM_LINKS; i++)
 
 
 
-void alpha_sum(double flows[], double old_flows[], double dif_flows[], long double alpha)
+void alpha_sum(double *flows, double *old_flows, double *dif_flows, long double alpha)
 {
 int i;
 

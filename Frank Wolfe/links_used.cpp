@@ -15,10 +15,10 @@ for ( i = 0; i < NUM_NODE; i++ )
 	{
 		links[i][j] = 0;		
 	
-	}; 
+	} 
 	
 
-}; 
+} 
 
 for ( i = 0; i < NUM_ZONE; i++ )
 {

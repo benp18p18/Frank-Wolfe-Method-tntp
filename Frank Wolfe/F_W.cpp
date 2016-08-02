@@ -2,17 +2,19 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "exact_network.h"
-#include "exact_trips.h"
+#include "exact_network.h" /*exacts the network information from the dataset*/
+#include "exact_trips.h" /*exacts the trtip information from the dataset */
 #include "shortest_path.h"
-#include "links_used.h"
-#include "find_flows.h"
-#include "find_times.h"
-#include "alpha_find.h"
-#include "test.h"
-#include "int_links.h"
-#include "defines.h"
-#include "var_set.h"
+#include "links_used.h" /* assigns the flow values to the links*/ 
+#include "find_flows.h" /*exacts the flow values from the links data set */
+			/*links_used.cpp and find_flows.cpp could be combined for improved performance using L_spot data set*/
+#include "find_times.h" /*based on the flows found finds the times on each specific link based on the impedence function */ 
+#include "alpha_find.h" /*performs a Golden Section Line Search */
+#include "test.h" /* returns the objective function value */
+#include "int_links.h" /* intials a set L which is the connection each zone has and L_spot which is the location on the network where this connection is from.
+			  These are used for improved performance of the shortest path method */
+#include "defines.h" /*contains the extern variables for DEGREE_MAX and MILE_C*/ 
+#include "var_set.h" /*this exacts the number of zones, nodes, and links from the network data set to be used throughout the program*/
 
 
 int DEGREE_MAX;
@@ -73,10 +75,6 @@ else
 
 DEGREE_MAX = 15;
 
-
-
-
-
 printf("Enter Number of Runs: ");
 char kk[20];
 scanf("%s", kk);
@@ -114,8 +112,8 @@ for ( i = 0; i < NUM_NODE; i++)
 }
 
 
-net_find(fp1, network);
-trips_find(fp2, trips);
+	net_find(fp1, network);
+	trips_find(fp2, trips);
 
 int ** L;
 int ** L_spot;
@@ -130,16 +128,16 @@ for ( i = 0; i < NUM_NODE; i++)
 
 }
 
-int_links(network, L, L_spot);
+	int_links(network, L, L_spot);
 
-double times[NUM_LINKS];
+double *times = (double*)malloc(sizeof(double)*NUM_LINKS);
 
 for ( i = 0; i < NUM_LINKS; i++)
 {
 	times[i] = network[4][i] + network[3][i]*MILE_C;
 }
 
-shortest_path(data, times, L, L_spot);
+	shortest_path(data, times, L, L_spot);
 
 double ** links;
 
@@ -151,16 +149,18 @@ for ( i = 0; i < NUM_NODE; i++)
 	
 }
 
-links_used(links, data, trips);
+	links_used(links, data, trips);
 
-double flows[NUM_LINKS];
+double *flows = (double *)malloc(sizeof(double)*NUM_LINKS);
+double *old_flows = (double *)malloc(sizeof(double)*NUM_LINKS);
+double *dif_flows = (double *)malloc(sizeof(double)*NUM_LINKS);
 
-find_flows(links, flows, network);
 
-find_times(flows, times, network);
+	find_flows(links, flows, network);
 
-double old_flows[NUM_LINKS];
-double dif_flows[NUM_LINKS];
+	find_times(flows, times, network);
+
+
 double alpha;
 
 for ( i = 0; i < NUM_LINKS; i++)
@@ -254,7 +254,9 @@ printf("\nCPU Time: %f\n\n", time_spent);
 
 free(data);
 free(links);
-
+free(flows);
+free(dif_flows);
+free(old_flows);
 
 return(0);
 }
