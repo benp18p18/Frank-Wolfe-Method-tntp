@@ -32,7 +32,8 @@ Results) The results will be written out to a data.txt file.
 <br>
 <br>
 The impedence function used: t = a + a(0.15)(x/capacity)^4<br>
-Where: t = the time on link i<br>
+Where:<br> 
+      t = the time on link i<br>
        a = free flow time for the link (given)<br>
        x = flows<br>
        capacity = flow capacity (given)<br>
