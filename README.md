@@ -32,12 +32,12 @@ For the datasets in the folder already:<br>
 Results) The results will be written out to a data.txt file. 
 <br>
 <br>
-The impedence function used: t__i = a + a(0.15)[(x/capacity)^4]<br>
+The impedence function used: t<sub>i</sub> = a<sub>i</sub> + a<sub>i</sub>(0.15)[(x<sub>i</sub>/capacity<sub>i</sub>)^4]<br>
 Where:<br> 
        t<sub>i</sub> = the time on link i<br>
-       a__i = free flow time for link i(given)<br>
-       x = flows<br>
-       capacity__i = flow capacity (given)<br>
+       a<sub>i</sub> = free flow time for link i(given)<br>
+       x<sub>i</sub> = flows on link i<br>
+       capacity<sub>i</sub> = flow capacity for link i(given)<br>
        0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
 Let me know if there are any issues<br>
