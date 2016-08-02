@@ -40,10 +40,10 @@ Where:<br>
        capacity<sub>i</sub> = flow capacity for link i (given)<br>
        0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
-The time function: time<sub>i</sub> = t<sub>i</sub> + miles<sub>cost</sub>(x<sub>i</sub>)<br>
+The time function: time<sub>i</sub> = t<sub>i</sub> + mile<sub>costs</sub>(x<sub>i</sub>)<br>
 Where: <br>
       time<sub>i</sub> = the total link time<br>
-      miles<sub>cost</sub> = Mile Cost inputted<br>
+      mile<sub>costs</sub> = Mile Costs inputted<br>
 
 Let me know if there are any issues<br>
 <br>
