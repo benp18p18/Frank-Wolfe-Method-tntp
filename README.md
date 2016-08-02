@@ -13,8 +13,8 @@ There are some data sets in the folder itself and others can be used either by:<
   -Placing the datasets in the folders (The preffered method)<br>
   -Using there paths as there location<br>
  <br>
- <br>
  The URL from where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
+ <br>
  <br>
  Additionally it should be noted that some of the datasets in there default<br>
  might not be formatted correctly. To do so, remove the ~comment lines but leave ~header line. <br>
