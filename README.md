@@ -34,12 +34,17 @@ Results) The results will be written out to a data.txt file.
 <br>
 The impedence function used: t<sub>i</sub> = a<sub>i</sub> + a<sub>i</sub>(0.15)[(x<sub>i</sub>/capacity<sub>i</sub>)^4]<br>
 Where:<br> 
-       t<sub>i</sub> = the time on link i<br>
+       t<sub>i</sub> = the flow impedence time on link i<br>
        a<sub>i</sub> = free flow time for link i (given)<br>
        x<sub>i</sub> = flows on link i<br>
        capacity<sub>i</sub> = flow capacity for link i (given)<br>
        0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
+The time function: time<sub>i</sub> = t<sub>i</sub> + miles<sub>cost</sub>(x<sub>i</sub>)<br>
+Where: <br>
+      time<sub>i</sub> = the total link time<br>
+      miles<sub>cost</sub> = Mile Cost inputted<br>
+
 Let me know if there are any issues<br>
 <br>
 
