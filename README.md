@@ -9,7 +9,7 @@ Steps to Run:<br>
 7) Chose either c for a custon set of a network and trips or chose d for the default set of the Chicago Regional<br>
 <br>
 NOTE:<br>
-There are some data sets in the folder itself and other can be used either by:<br>
+There are some data sets in the folder itself and others can be used either by:<br>
   -Placing the datasets in the folders (The preffered method)<br>
   -Using there paths as there location<br>
  <br>
