@@ -12,7 +12,7 @@ NOTE:<br>
 There are some data sets in the folder itself and others can be used either by:<br>
   -Placing the datasets in the folder (The preferred method)<br>
   -Using there paths as there location<br>
-  (if nothing happens then there might be issue opening up the datasets. Make sure everything is correctly inputted.)<br>
+  (if nothing happens then there might be an issue opening up the datasets. Make sure everything is correctly inputted.)<br>
  <br>
  Where I got my datasets from: https://github.com/bstabler/TransportationNetworks.git
  <br>
