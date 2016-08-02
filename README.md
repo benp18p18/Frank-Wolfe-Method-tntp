@@ -37,7 +37,7 @@ Where:<br>
        t<sub>i</sub> = the time on link i<br>
        a<sub>i</sub> = free flow time for link i (given)<br>
        x<sub>i</sub> = flows on link i<br>
-       capacity<sub>i</sub> = flow capacity for link i(given)<br>
+       capacity<sub>i</sub> = flow capacity for link i (given)<br>
        0.15 and 4 are just typical amounts used for this standard impedence function.<br>
 <br>
 Let me know if there are any issues<br>
