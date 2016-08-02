@@ -4,13 +4,27 @@ Steps to Run:<br>
 1) Download the zip file <br>
 2) Exact <br>
 3) In the commandline, cd to the fold <br>
-4) cd into the sub folder (SiouxFalls or ChicagoSketch) <br>
 5) type "make" into the commandline <br>
 6) to run ./F_W.exe <br>
+7) Chose either c for a custon set of a network and trips or chose d for the default set of the Chicago Regional<br>
+<br>
+NOTE:<br>
+There are some data sets in the folder itself and other can be used either by:<br>
+  -Placing the datasets in the folders (The preffered method)<br>
+  -Using there paths as there location<br>
+ <br>
+ Additionally it should be noted that some of the datasets in there default<br>
+ might not be formatted correctly. To do so, remove the ~comment lines but leave ~header line. <br>
+<br>
+8) input the Miles cost which is a impedence cost of minute/mile. Each Dataset has a different Miles cost<br>
+<br>
+For the datasets in the folder already:<br>
+(Chicago Regional) Mile Costs = 0.25<br>
+(Chicago Sketch) Mile Costs = 0.04<br>
+(Sioux Falls) Mile Costs = 0<br>
+<br>
+9) Lastly chose the number of integrations of the Frank-Wolfe method to do.<br>
 <br>
 Let me know if there are any issues<br>
 <br>
-Note: still working on improvements in calculating and displaying the Average Excess Cost.<br>
-Additionally, I'm having issues with using fclose on the files used for ChicagoSketch on some machines.<br>
-Any suggestions would be great.
 
