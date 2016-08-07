@@ -25,7 +25,7 @@ int mover(double *l, int *p, int lenght, int point, double val_point)
 
 int k, r;
 lenght++;
-for ( k = 0; k < lenght && val_point > l[k]; k++)
+for ( k = 0; k < lenght && val_point >= l[k]; k++)
 {	
 
 }
