@@ -13,13 +13,14 @@
 #include "test.h" /* returns the objective function value */
 #include "int_links.h" /* intials a set L which is the connection each zone has and L_spot which is the location on the network where this connection is from.
 			  These are used for improved performance of the shortest path method */
+#include "average_excess.h"
 #include "defines.h" /*contains the extern variables for DEGREE_MAX and MILE_C*/ 
 #include "var_set.h" /*this exacts the number of zones, nodes, and links from the network data set to be used throughout the program*/
 
 
 int DEGREE_MAX;
 double MILE_C;
-
+double TOLL_C;
 
 int main()
 {
@@ -40,6 +41,7 @@ if ( (int)custom != 100)
 	char network_file[40];
 	printf("\nInput network file path: ");
 	scanf(" %s", network_file);
+	printf("\n");
 
 	char trip_file[40];
 	printf("Input trip file path: ");
@@ -58,21 +60,24 @@ if ( (int)custom != 100)
 	printf("\n");
 	MILE_C = atof(miles_cost);
 
-
+	char toll_cost[20];
+        printf("What is the Toll cost? ");
+        scanf("%s", toll_cost);
+        printf("\n");
+        TOLL_C = atof(toll_cost);
 
 }
 else
 {
-	fp3 = fopen("ChicagoRegional_net.tntp", "r");
-	fp1 = fopen("ChicagoRegional_net.tntp", "r");
-	fp2 = fopen("ChicagoRegional_trips.tntp", "r");
+	fp3 = fopen("SiouxFalls_net.tntp", "r");
+	fp1 = fopen("SiouxFalls_net.tntp", "r");
+	fp2 = fopen("SiouxFalls_trips.tntp", "r");
 	var_set(fp3);
 	fclose(fp3);
-	MILE_C = 0.25;
-
+	MILE_C = 0;
+	TOLL_C = 0;
 
 }
-
 DEGREE_MAX = 15;
 
 printf("Enter Number of Runs: ");
@@ -86,28 +91,25 @@ clock_t begin = clock();
 int i, j;
 
 double ** network;
-network = (double **)malloc(sizeof(double *)*9);
+network = new double *[sizeof(double *)*10];
         for ( i = 0; i < 9; i++)
         {
-                network[i] = (double *)malloc(sizeof(double)*NUM_LINKS);
+                network[i] = new double [sizeof(double)*NUM_LINKS];
 
         }
 
 double ** trips;
-trips = (double **)malloc(sizeof(double *)*NUM_ZONE);
+trips = new double * [sizeof(double *)*NUM_ZONE];
 for ( i = 0; i < NUM_NODE; i++)
 {
-	trips[i] = (double *)malloc(sizeof(double)*NUM_ZONE);
+	trips[i] = new double [sizeof(double)*NUM_ZONE];
 
 }
 
-struct values *data = (struct values*)malloc(sizeof(struct values));
-(*data).l = (double **)malloc(sizeof(double)*NUM_ZONE);
-(*data).p = (int **) malloc(sizeof(int *)*NUM_ZONE);
+int ** previous = new int * [sizeof(int *)*NUM_ZONE];
 for ( i = 0; i < NUM_NODE; i++)
 {
-	(*data).l[i] = (double *)malloc(sizeof(double)*NUM_NODE);
-	(*data).p[i] = (int *)malloc(sizeof(int)*NUM_NODE);
+	previous[i] = new int [sizeof(int)*NUM_NODE];
 
 }
 
@@ -118,42 +120,44 @@ for ( i = 0; i < NUM_NODE; i++)
 int ** L;
 int ** L_spot;
 
-L = (int **)malloc(sizeof(int *)*NUM_NODE); 
-L_spot = (int **)malloc(sizeof(int *)*NUM_NODE); 
+L =  new int * [sizeof(int *)*NUM_NODE]; 
+L_spot = new int * [sizeof(int *)*NUM_NODE]; 
 for ( i = 0; i < NUM_NODE; i++) 
 {
 
-        L[i] = (int *)malloc(sizeof(int )*DEGREE_MAX);
-        L_spot[i] = (int *)malloc(sizeof(int)*DEGREE_MAX);
+        L[i] = new int [sizeof(int )*DEGREE_MAX];
+        L_spot[i] = new int [sizeof(int)*DEGREE_MAX];
 
 }
 
 	int_links(network, L, L_spot);
 
-double *times = (double*)malloc(sizeof(double)*NUM_LINKS);
+double *times = new double [sizeof(double)*NUM_LINKS];
 
 for ( i = 0; i < NUM_LINKS; i++)
 {
-	times[i] = network[4][i] + network[3][i]*MILE_C;
+	times[i] = network[4][i] + network[3][i]*MILE_C + network[8][i]*TOLL_C;
 }
 
-	shortest_path(data, times, L, L_spot);
+
+	shortest_path(previous, times, L, L_spot);
 
 double ** links;
 
-links = (double **)malloc(sizeof(double *)*NUM_NODE);
+links = new double * [sizeof(double *)*NUM_NODE];
         
 for ( i = 0; i < NUM_NODE; i++)
 {
-	links[i] = (double *)malloc(sizeof(double )*NUM_NODE);
+	links[i] = new double [sizeof(double )*NUM_NODE];
 	
 }
 
-	links_used(links, data, trips);
+	links_used(links, previous, trips);
 
-double *flows = (double *)malloc(sizeof(double)*NUM_LINKS);
-double *old_flows = (double *)malloc(sizeof(double)*NUM_LINKS);
-double *dif_flows = (double *)malloc(sizeof(double)*NUM_LINKS);
+double *flows = new double [sizeof(double)*NUM_LINKS];
+double *old_flows = new double [sizeof(double)*NUM_LINKS];
+double *dif_flows = new double [sizeof(double)*NUM_LINKS];
+double *save_flows = new double [sizeof(double)*NUM_LINKS];
 
 
 	find_flows(links, flows, network);
@@ -175,7 +179,22 @@ z = test(flows, network);
 
 printf("\rInt Obj: %Lf\n\n", z);
 
+
+double total;
+
+total = total_flow(trips);
+
+
+FILE * op = fopen("obj.txt", "w");
+
+fprintf(op, "\tObj\t\t\t\t alpha\t\t\t\t AEC\n\n");
+fprintf(op, "0 %0.10Lf\n", z);
+
+double excess_var;
+double avg_average_excess;
+
 long double z_save;
+
 
 z_save = 100000000;
 
@@ -185,11 +204,23 @@ tall = 0.1;
 for ( i = 0; i < atoi(kk) ; i++)
 {
 
-	shortest_path(data, times, L, L_spot);
 
-	links_used(links, data, trips);
+	shortest_path(previous, times, L, L_spot);
+
+	links_used(links, previous, trips);
 
 	find_flows(links, flows, network);
+
+	for ( j = 0; j < NUM_LINKS; j++)
+        {
+                save_flows[j] = flows[j];
+        }
+
+
+	excess_var = average_excess(old_flows, save_flows, times);
+        avg_average_excess = excess_var/total;
+
+
 
 	alpha_mode(flows, old_flows, dif_flows);
 
@@ -200,6 +231,7 @@ for ( i = 0; i < atoi(kk) ; i++)
 	for ( j = 0; j < NUM_LINKS; j++)
 	{
         	old_flows[j] = flows[j];
+
 	}
 
 	z = test(old_flows, network);
@@ -222,16 +254,22 @@ for ( i = 0; i < atoi(kk) ; i++)
 
 	printf("Tall : %0.10f\n\n", tall);
 
+	printf("Average Excess : %0.30f\n\n", avg_average_excess);
+	
+	fprintf(op, "%d %0.10Lf  %0.10f  %0.10f\n", i+1, z, alpha, avg_average_excess);	
+
+
 }
 
+fclose(op);
 
 FILE * fp;
 
 fp = fopen("data.txt", "w");
 
 
-fprintf(fp,"\nint\t   end\t");
-fprintf(fp,"   flow\t\t");
+fprintf(fp,"\nint end\t");
+fprintf(fp,"\tflow\t\t\t");
 fprintf(fp,"cost\n\n");
 
 
@@ -239,24 +277,24 @@ for ( i = 0; i < NUM_LINKS; i++)
 {
 	fprintf(fp,"%d\t", (int)network[0][i]);
 	fprintf(fp,"%d\t", (int)network[1][i]);
-        fprintf(fp,"%f\t", flows[i]);
-	fprintf(fp,"%f;\t\n", times[i]);
+        fprintf(fp,"%0.10f \t", flows[i]);
+	fprintf(fp,"%0.10f\n", times[i]);
 }
 
 fclose(fp);
 fclose(fp1);
 fclose(fp2);
 
+
 clock_t end = clock();
 double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
 printf("\nCPU Time: %f\n\n", time_spent);
 
-free(data);
-free(links);
-free(flows);
-free(dif_flows);
-free(old_flows);
+delete(links);
+delete(flows);
+delete(dif_flows);
+delete(old_flows);
 
 return(0);
 }

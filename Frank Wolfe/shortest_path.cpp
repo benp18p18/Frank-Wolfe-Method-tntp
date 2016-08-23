@@ -5,7 +5,7 @@
 #include "shortest_path.h"
 #include "q_sort.h"
 
-void shortest_path(struct values *data, double* times, int ** L, int ** L_spot)
+void shortest_path(int ** previous, double* times, int ** L, int ** L_spot)
 {
 
 double **L_value;
@@ -59,7 +59,7 @@ for (i = 0; i < NUM_ZONE; i++)
 
 int Q_value;
 int *Q;
-Q = (int*)malloc(sizeof(int)*NUM_NODE);
+Q = new int [sizeof(int)*NUM_NODE];
 
 int w = 0;
 for (i = 0; i < NUM_ZONE; i++)
@@ -80,7 +80,7 @@ for (i = 0; i < NUM_ZONE; i++)
 	Q_value = Q2[i] - 1;
 	printf("\r%d", i+1);
 	fflush(stdout);
-	queue(L, L_value, p, l, Q_value, Q, data); 
+	queue(L, L_value, p, l, Q_value, Q, previous); 
 	
 }
 
@@ -92,14 +92,14 @@ free(p);
 free(l);
 }
 
-void queue(int **L, double **L_value, int *p, double *l, int source, int *Q, struct values *data) 
+void queue(int **L, double **L_value, int *p, double *l, int source, int *Q, int ** previous) 
 { 
 
 int i, j, kk; 
 int q_value; 
 
-int *qp = (int*)malloc(sizeof(int)*NUM_NODE);
-double *ql = (double*)malloc(sizeof(double)*NUM_NODE); 
+int *qp = new int [sizeof(int)*NUM_NODE];
+double *ql = new double [sizeof(double)*NUM_NODE]; 
 int lenght = 0;
 
 qp[0] = source;
@@ -144,12 +144,11 @@ for (kk = 0; lenght >= 0; kk++)
 
 for(i = 0; i < NUM_NODE; i++)
 {	
-	(*data).l[source][i] = l[i];
-	(*data).p[source][i] = p[i]; 
+	previous[source][i] = p[i]; 
 }
 
-free(ql);
-free(qp);
+delete [] ql;
+delete [] qp;
 
 }
 

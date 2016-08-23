@@ -26,7 +26,7 @@ x_r = (b - a)*r + a;
 
 int i;
 
-double B, A, C;
+double B, A, C, D;
 
 
 while (b - a >= 2*tall)
@@ -37,13 +37,14 @@ while (b - a >= 2*tall)
 
 	for ( i  = 0; i < NUM_LINKS; i++)
 	{
-		B = (network[4][i]*((0.15)/pow(network[2][i], 4)));
+		B = (network[4][i]*(0.15));
 		A = network[4][i];
 		C = network[3][i]*MILE_C;
+		D = network[8][i]*TOLL_C;
 		k_l = old_flows[i] + (dif_flows[i]*x_l);
 		k_r = old_flows[i] + (dif_flows[i]*x_r);
-		z_l += (A*k_l) + (B/5)*pow(k_l, 5) + C*k_l ;
-		z_r += (A*k_r) + (B/5)*pow(k_r, 5)+ C*k_l;
+		z_l += (A*k_l) + (B/(5*pow(network[2][i], 4)))*pow(k_l, 5) + C*k_l + D*k_l;
+		z_r += (A*k_r) + (B/(5*pow(network[2][i], 4)))*pow(k_r, 5) + C*k_l + D*k_l;
 	}
 
 	if (z_l <= z_r)

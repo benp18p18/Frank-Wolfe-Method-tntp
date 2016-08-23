@@ -46,7 +46,7 @@ void var_set(FILE * fp3)
 	
 	
 
-
+	free(bhead);
 
 
 

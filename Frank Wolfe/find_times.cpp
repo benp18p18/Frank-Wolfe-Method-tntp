@@ -4,7 +4,7 @@
 #include <math.h>
 #include "find_times.h"
 
-void find_times(double flows[], double *times, double **network)
+void find_times(double *flows, double *times, double **network)
 {
 
 int i;
@@ -17,7 +17,7 @@ for ( i = 0; i < NUM_LINKS; i++)
 
 for ( i = 0; i < NUM_LINKS; i++)
 {
-	times[i] = network[4][i]*(1 + 0.15*pow((flows[i]/network[2][i]),4)) + network[3][i]*MILE_C;  
+	times[i] = network[4][i]*(1 + 0.15*pow((flows[i]/network[2][i]),4)) + network[3][i]*MILE_C + network[8][i]*TOLL_C;  
 }
 
 

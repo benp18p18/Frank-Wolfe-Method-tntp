@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void links_used(double **links, struct values *data, double **trips)
+void links_used(double **links, int ** previous, double **trips)
 {
 int i, j;
 int g, k;
@@ -27,10 +27,10 @@ for ( i = 0; i < NUM_ZONE; i++ )
 		g = j;
 		if ( trips[i][j] != 0)
 		{	
-			while ((*data).p[i][g] != 0)
+			while (previous[i][g] != 0)
 			{
 				k = g;
-				g = (*data).p[i][g] - 1;
+				g = previous[i][g] - 1;
 				links[g][k] += trips[i][j];
 			}
 

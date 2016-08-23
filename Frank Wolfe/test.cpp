@@ -9,17 +9,17 @@ long double z;
 int i;
 z = 0;
 
-double A, B, C;
+double A, B, C, D;
 
 
 for ( i = 0; i < NUM_LINKS; i++)
 {
 	A = network[4][i];
-	B = network[4][i]*((0.15)/pow(network[2][i], 4));
+	B = network[4][i]*(0.15);
 	C = network[3][i]*MILE_C;
-	
+	D = network[8][i]*TOLL_C;
 
-	z += A*flows[i] + ((B/5)*pow(flows[i], 5)) + C*flows[i]; 
+	z += A*flows[i] + ((B/(5*pow(network[2][i], 4)))*pow(flows[i], 5)) + C*flows[i] + D*flows[i]; 
 
 
 } 

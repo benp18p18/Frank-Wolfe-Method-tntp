@@ -100,6 +100,8 @@ void trips_find(FILE *fp2, double ** trips)
 printf("\n\n");
 }
 */
+
+free(btrip);
 }	
 
 
