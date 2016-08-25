@@ -69,13 +69,13 @@ if ( (int)custom != 100)
 }
 else
 {
-	fp3 = fopen("SiouxFalls_net.tntp", "r");
-	fp1 = fopen("SiouxFalls_net.tntp", "r");
-	fp2 = fopen("SiouxFalls_trips.tntp", "r");
+	fp3 = fopen("ChicagoRegional_net.tntp", "r");
+	fp1 = fopen("ChicagoRegional_net.tntp", "r");
+	fp2 = fopen("ChicagoRegional_trips.tntp", "r");
 	var_set(fp3);
 	fclose(fp3);
-	MILE_C = 0;
-	TOLL_C = 0;
+	MILE_C = 0.25;
+	TOLL_C = 0.1;
 
 }
 DEGREE_MAX = 15;
